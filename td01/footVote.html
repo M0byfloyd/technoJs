@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My voting page</title>
+        <meta charset="utf-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    </head>
+    <body style="font-family:sans-serif;font-size:24px;">
+        <h1>Best football player</h1>
+        <div id="app">
+            <p>
+              <button v-on:click ="augmenteM">Vote Mbappe</button>
+              <button v-on:click ="augmenteF">Vote</button>
+              <button v-on:click ="augmenteT">Vote</button>
+            </p>
+            
+            
+            <ul>
+                <li><span v-if="nbTotalVotes >0"> {{  pourcentM }}</span></li>
+                <li><span v-if="nbTotalVotes >0"> {{ pourcentF }}</span></li>
+                <li><span v-if="nbTotalVotes >0">{{pourcentT}}</span></li>
+            </ul>
+            <p>
+                Total des votes : {{ nbTotalVotes }}
+            </p>
+        </div>
+        <script>
+            var vue1 = new Vue({
+                el: "#app",
+                data: { 
+                    nbVoteMbappe :0,
+                    nbVoteFakir :0,
+                    nbVoteThauvin :0
+                },
+                methods: {
+                    augmenteM : function (){
+                        this.nbVoteMbappe += 1;
+                    },
+                    augmenteF : function (){
+                        this.nbVoteFakir += 1;
+                    },
+                    augmenteT : function (){
+                        this.nbVoteThauvin += 1;
+                    }
+                },
+                computed: {
+                    nbTotalVotes: function() {
+                        return this.nbVoteFakir + this.nbVoteMbappe + this.nbVoteThauvin
+                    },
+                    pourcentM : function() {
+                        return ((this.nbVoteMbappe)/this.nbTotalVotes*100).toFixed(2)
+                    },
+                    pourcentF : function() {
+                        return ((this.nbVoteFakir)/this.nbTotalVotes*100).toFixed(2)
+
+                    },
+                    pourcentT : function() {
+                        return ((this.nbVoteThauvin)/this.nbTotalVotes*100).toFixed(2)
+
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

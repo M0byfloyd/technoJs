@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    </head>
+    <body style="font-family:sans-serif;font-size:24px;">
+      <div id="app">
+        <input v-model="prenom">
+        <select v-model="langage" >
+            <option value="EN" >English</option>
+            <option value="FR" >Français</option>
+            <option value="ES" >Spagnol</option>
+        </select>
+        <p>{{ langage }}</p>
+        <h1>
+            <span v-if="langage == 'EN'">{{ theMessageEn}}</span>
+            <span v-else-if="langage == 'ES'"> {{ theMessageEs}}</span>
+            <span v-else>{{theMessageFr}}</span>
+            {{ prenom}}
+        </h1>    
+    
+      </div>
+      <script>
+          var vue1 = new Vue({
+              el: "#app",
+              data: {
+                theMessageFr: "Welcome",
+                theMessageEn: "Bienvenue",
+                theMessageEs: "Hallo aus Berlin ",
+                prenom:"",
+                langage:"EN",
+              }
+          });
+      </script>
+    </body>
+</html>
