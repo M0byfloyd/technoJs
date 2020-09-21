@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+  </head>
+  <body style="margin:0px;font-family:sans-serif;">
+    <h1>List of contacts</h1>
+    <div id="app">
+        <h3>  {{message }} </h3>
+        <ul>
+            <li v-for="contact in contacts"><img v-bind:src="contact.picture" > <span v-if="contact.gender =='female'">Mrs</span><span v-else>Mr</span> <span>{{ contact.fname }}</span> <span>{{ contact.lname }}</span> <span>{{ contact.email }}</span> <span style="font-weight: bold;">[ {{ contact.company}} ]</span></span></li>
+          {{contacts}}
+        </ul>
+    </div>
+    <script>
+        var vue1 = new Vue({
+            el: "#app",
+            data: {
+              contacts: "",
+              message: "Waiting..."
+            },
+            created: function () {
+                this.message="Loading..."
+                this.$http.get('data1.json')
+                    .then(response => {
+                        this.contacts=response.body // en cas de succès
+                    }, response => {
+                        this.message="Error!" // en cas d'échec
+                    });
+                this.message="Finished!"
+              }
+            }
+        )
+    </script>
+  </body>
+</html>
