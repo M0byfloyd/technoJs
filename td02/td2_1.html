@@ -8,6 +8,9 @@
   <body style="margin:0px;font-family:sans-serif;">
     <h1>List of contacts</h1>
     <div id="app">
+        <p>{{ nbPersons}}</p>
+        <p>{{ meanAge }}</p>
+        <p>{{ nbMen }}</p>
         <h3>  {{message }} </h3>
         <ul>
             <li v-for="contact in contacts"><img v-bind:src="contact.picture" > <span v-if="contact.gender =='female'">Mrs</span><span v-else>Mr</span> <span>{{ contact.fname }}</span> <span>{{ contact.lname }}</span> <span>{{ contact.email }}</span> <span style="font-weight: bold;">[ {{ contact.company}} ]</span></span></li>
@@ -18,9 +21,33 @@
         var vue1 = new Vue({
             el: "#app",
             data: {
-              contacts: "",
+              contacts: [],
               message: "Waiting..."
             },
+            computed :  {
+                nbPersons : function () {
+                    return this.contacts.length;
+                },
+                meanAge : function () {
+                    sum = 0;
+                    this.contacts.forEach(
+                        function (el) {
+                        sum+=el.age;
+                    })
+                    return sum/this.nbPersons;
+                },
+                nbMen :function() {
+                    nb=0;
+                    this.contacts.forEach(
+                        function (el) {
+                            if (element.gender == 'male') {
+                                nb++
+                            }
+                        }
+                    )
+                    return nb;
+                }
+            } , 
             created: function () {
                 this.message="Loading..."
                 this.$http.get('data1.json')

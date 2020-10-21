@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body style="font-family:sans-serif;font-size:24px;">
+        <h1>List of users:</h1>
+        <div id="app">
+         <input v-model="listAdd">
+         <input type="submit" @click="ajouterListe"> 
+         <input @click="clearListe" value="Clear" type="submit">
+          <ul> 
+              <li v-for="(element, index) in todoList" value="Effacer"> {{ element}} <button @click="suprimerElement(index)" >X</button></li>
+          </ul>
+    
+          </div>
+        <script>
+            var vue1 = new Vue({
+                el: "#app",
+                data: {
+                    listAdd: "",
+                    todoList :
+                    [
+                    "7 cartes : Charline",
+                    "jetons : Paul",
+                    "boîte : Eline",
+                    "texte animation : alex tu fais partie de la team graphisme",
+                    "google slides : tout le monde",
+                    "diapo : Charline",
+                    "mockup intégré : tout le monde"
+                    ]
+
+                },
+                methods: {
+                   ajouterListe : function() {
+                    this.todoList.push(
+                        this.listAdd,
+                    )},
+                    
+                    clearListe : function() {
+                        this.todoList = [];
+                    },
+                    suprimerElement : function(index) {
+                           // alert('Non vous n\'allez pas suprimer : "' + element + '".')
+                            this.todoList.splice(index,1)
+                    
+                        }
+                          
+                },
+                computed: {
+                 
+                },
+                
+            });
+        </script>
+    </body>
+</html>
